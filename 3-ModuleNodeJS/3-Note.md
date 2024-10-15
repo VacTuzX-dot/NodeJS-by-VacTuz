@@ -1,8 +1,6 @@
 การโหลด Module ที่มาพร้อมกับNodeJS เรียกว่า Build-in Module ไม่ต้องระบุตำแหน่งfolderเนื่องจากNodeJS ทราบอยู่แล้วว่าคือ Build-in Module ซึ่งแตกต่างจากการโหลดModuleอื่นๆที่สร้างขึ้นมาใหม่ ที่ต้องกำหนดpathและระบุตำแหน่งFileของModule
 
-```html
 <a href="./ModulePath/my-path.js">ModulePath</a>
-```
 
 ```js
 const path = require("path"); // โหลดModule path ที่เป็น build-in module
@@ -11,9 +9,7 @@ const path01 = require("./path"); // โหลด Module ที่เป็นFi
 
 การเชื่อมข้อความกับตัวแปรใน JavaScript เราจะใช้เครื่องหมายบวก + เชื่อมระหว่างข้อความกับค่าที่ได้จากตัวแปร ดังตัวอย่างต่อไปนี้
 
-```html
 <a href="./ModulePath/my-path.js">ModuleOS</a>
-```
 
 ```js
 const os = require("os");
