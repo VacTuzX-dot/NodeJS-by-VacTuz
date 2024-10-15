@@ -27,6 +27,8 @@ console.log(`Total Memory is: ${totalMemory}`);
 
 สังเกตว่าเราจะใช้เครื่องหมาย backtick(`)ครอบtextทั้งหมด ถ้าต้องการแสดงค่าจากตัวแปร ให้นำชื่อตัวแปรไปใส่ไว้ใน ${ } ด้วยวิธีนี้การแสดงtextพร้อมค่าจากตัวแปรจะสะดวกขึ้นมาก เพราะไม่ต้องใช้เครื่องหมาย + สลับระหว่างตัวแปรและtext
 
+<a href="./ModulePath/my-path.js">ModuleOS</a>
+
 File System
 ถ้าต้องการ เพิ่ม ลบ file เราสามารถใช้ methodต่างๆภายในmodule file system
 ส่วนวิธีเรียกใช้ก็ง่ายๆ โดนผ่านค่า fs เข้าไปยัง require() ก็จะได้objectของmodule file systemมาใช้งาน
@@ -37,6 +39,8 @@ const fs = require("fs");
 
 ตัวอย่างการใช้method readdir() ของmodule file systemเพื่อดูว่าfolderที่สนใจอยู่นั้นมีfilesอะไรอยู่บ้าง ซึ่งresultจากการเรียกใช้methodนี้จะได้เป็นArrayแสดงชื่อFilesทั้งหมดในfolderนั้นๆ
 method readdir()ต้องผ่านค่าparamอย่างน้อย2ค่าโดยparamแรกคือpathของfolderที่ต้องการตรวจสอบ ส่วนparamค่าที่สองคือ callback function ซึ่งจะถูกเรียกใช้งานเมื่อเข้าไปยังfolderที่ต้องการเรียบร้อยแล้ว
+
+<a href="./ManageFileSys/readdir.js">ModuleFileSystem</a>
 
 ```js
 fs.readdit(path, callback);
