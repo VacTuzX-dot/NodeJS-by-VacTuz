@@ -40,11 +40,56 @@ const fs = require("fs");
 ตัวอย่างการใช้method readdir() ของmodule file systemเพื่อดูว่าfolderที่สนใจอยู่นั้นมีfilesอะไรอยู่บ้าง ซึ่งresultจากการเรียกใช้methodนี้จะได้เป็นArrayแสดงชื่อFilesทั้งหมดในfolderนั้นๆ
 method readdir()ต้องผ่านค่าparamอย่างน้อย2ค่าโดยparamแรกคือpathของfolderที่ต้องการตรวจสอบ ส่วนparamค่าที่สองคือ callback function ซึ่งจะถูกเรียกใช้งานเมื่อเข้าไปยังfolderที่ต้องการเรียบร้อยแล้ว
 
-<a href="./ManageFileSys/readdir.js">ModuleFileSystem</a>
-
 ```js
 fs.readdit(path, callback);
 ```
 
 path = pathของfolderที่สนใจ
 callback = functionที่จะถูกเรียกใช้หลังจากเข้าไปยังpathที่กำหนดซึ่งอาจเข้าใช้งานสำเร็จหรือไม่สำเร็จก็ได้ ถ้าสำเร็จก็จะได้Arrayของfilesต่างๆที่อยู่ในfolderนั้นๆกลับา แต่ถ้าไม่สำเร็จก็จะได้ข้อผิดพลาดส่งกลับมาแทน
+
+<a href="./ManageFileSys/readdir.js">ModuleFileSystem Readdir</a>
+
+การตรวจสอบName Lists Folderในpath Module File systemจะมีใช้งานอยู่ 2 แบบคือแบบ Asynchronous กับแบบ Synchronous
+
+- Method readdir() จะมีลักษณะเป็นแบบ Asynchronous ซึ่งหมายถึง การเข้าไปดูFilesต่างๆในFolder ไม่จำเป็นต้องรอให้ได้resultก่อน ก็สามารถไปทำคำสั่งอื่น ซึ่งวิธีนี้จะไม่บล็อกการทำงานโดยรวมของApplication
+- Method readdirSync() จะมีลักษณะเป็นแบบ Synchronous ซึ่งหมายถึงเวลาเราเรียกใช้คำสั่งนี้จะต้องรอให้ได้resultก่อน จึงจะไปทำคำสั่งอื่นๆต่อไปได้
+
+ตัวอย่างการใช้Method readdirSync ซึ่งเป็นMethodที่มีจุดประสงค์เดียวกับreaddirแต่เป็นCodeแบบSynchronous (สังเกตว่าไม่สามารถแสดงerrorได้)
+
+<a href="./ManageFileSys/readdirSync.js">ModuleFileSystem ReaddirSync</a>
+
+Module Event
+eventคือเหตุการณ์ที่เกิดขึ้นระหว่างใช้งานApp เช่น เมื่อClick mouse, เมื่อเปลี่ยนแปลงInputที่อยู่ในForm, เมื่อยกปุ่มKeyboard ฯลฯ การเขียนCodeเพื่อresponsกับEventเหล่านี้ สามารถใช้คำสั่งต่างๆที่อยู่ในModule Eventได้
+
+การโหลดโมดูล Events Module จะได้class EventEmitter กลับมา (ไม่ใช่ObjectหรือFunction แต่เป็นClass) ดังนั้นหลังจากโหลดโมดูล Event จะต้องสร้างObjectจากคลาสEventEmitterอีกครั้งดังตัวอย่างต่อไปนี้
+
+```js
+const EventEmitter = require("events"); //โหลดโมดูลEvent จากนั้นนำresultไปเก็บยังตัวแปรEventEmitter สังเกตว่าจะตั้งชื่อตัวแปรด้วยอักษรตัวใหญ่ เพื่อบอกให้ทราบว่าตัวแปรนี้เก็บชื่อClass
+const emitter = new EventEmitter(); // สร้างObjectจากคลาส EventEmitter แล้วนำresultไปเก็บยังตัวแปร emitter
+```
+
+เมื่อสร้างObject emitterแล้ว เราจะใช้Methodต่างๆที่อยู่ในobject emitterเพื่อสร้างEvent Listener(หรือเรียกว่าEvent Handler)เป็นตัวสังเกตการณ์ คอยดูว่ามีEventตามที่กำหนดหรือไม่
+ถ้ามีEventตรงกับที่กำหนด ให้ทำคำสั่งที่เตรียมไว้ต่อไปเช่น สร้างผู้สังเกตการณ์ (Listener) เพื่อรอคอยการClick Mouse หากผู้สังเกตุการณ์ตรวจพบการClick Listenerก็จะทำคำสั่งตามที่เตรียมเอาไว้ เป็นต้น
+
+Steps 1 : เตรียม Event Listener เอาไว้ล่วงหน้า
+ต้องกำหนดEventขึ้นมา หากเกิดEventแบบนี้ จะให้runคำสั่งอะไร เช่น หากUserส่ง HTTP Request มาที่ Server ก็สั่งให้ส่ง HTTP Response กลับไปด้วยtextว่า "Status OK" เป็นต้น
+
+ต่อมากำหนดEvent Listenerเป็นเหมือนกับคนที่คอยดักฟังว่ามีEventนี้เกิดขึ้นหรือไม่ ถ้ามีก็จะให้ไปทำอะไร
+
+```js
+emitter.addListener("myEvent", function (args) {
+  console.log("Hello I found you: myEvent");
+});
+```
+
+จากCode Examกำหนดชื่อeventว่า myEvent โดยเมื่อเกิดeventนี้เกิดขึ้น ก็จะสั่งให้แสดงtextออกมาว่า Hello I found you: myEvent
+
+addListener() คือการเพิ่มEventเข้าไปในObjectเป็นการเตรียมEventเอาไว้ล่วงหน้า หากเกิดEventตรงกับที่กำหนดก็จะRunชุดคำสั่งที่ได้เตรียมไว้
+
+Steps 2 : Assign Event
+Eventที่เกิดขึ้นในAppมีหลายรูปแบบ เช่น เมื่อUserกรอกURL ที่ BrowserจะเกิดEvent HTTP Request เพื่อร้องขอDataจาก Server หรือขณะที่Userแตะหน้าจอมือถือแล้วยกนิ้วขึ้น ก็จะเกิดEvent Touched Up Inside เป็นต้น
+
+    Eventที่จะเกิดขึ้นในระหว่างที่Userกำลังใช้งานAppหรือเกิดจากCodeที่เราCodingขึ้นมาก็ได้ เช่น Eventแตะหน้าจอ Eventลากนิ้วที่หน้าจอ EventจากการDouble Click ฯลฯ หากEventที่สร้างขึ้นหรือที่ปล่อยมานั้นตรงกับEventที่Event Listener มองหาอยู่ ก็จะทำคำสั่งตามที่กำหนดไว้ล่วงหน้าทันที
+
+Code Exam เพื่อกำหนดEventขึ้นมาเองโดยใช้Method emit() ดังตัวอย่างต่อไปนี้
+<a href="./ModuleEvent/my-event.js">MyEvent</a>
