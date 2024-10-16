@@ -207,6 +207,40 @@ console.log("Listening form port 3000");
 ## Steps 4 ทดสอบการ Connect ด้วยการเปิดWeb Browser
 
 เมื่อClient(Browser)เชื่อมกับServer(HTTP Server)เรียบร้อยก็จะเกิด Event connection เมื่อ Event Listener พบEvent connection ก็จะพิมพ์text Client connected ที่console vscode
-เปิดBrowserลองพิมพ์ url เป็น http://localhost:3000 แล้วกด <Enter>
+เปิดBrowserลองพิมพ์ url เป็น http://localhost:3000 แล้วกด Enter
 
 **Note เมื่อClient ส่งHttp Request ร้องขอDataไปยังServer แต่Examนี้ยังไม่ได้เตรียมBodyที่จะresponseกลับไปที่Client ดังนั้นเมื่อกรอก http://localhost:3000 แล้วกด Enter จึงไม่พบtextใดๆบนBrowser**
+
+## Steps 5 หยุดการทำงานของServer
+
+เนื่องจากการrun HTTP Serverนั้น จะเป็นการทำงานที่จะทำไปเรื่อยๆโดยจะรอการเชื่อมต่อจากClient เราสามารถสั่งหยุดการทำงานของServerได้ ตามขั้นตอนนี้
+
+- ไปที่Terminal ที่Run Serverไว้
+- กด Ctrl + C เพื่อหยุดการทำงานของServer
+
+# How to use HTTP module to manage http request
+
+จากTopicsที่ผ่านมาเราได้สร้างObject server จากModule http โดยไม่ได้ผ่านค่าอะไรเข้าไป แต่ในหัวข้อนี้ เราจะสร้างObject serverพร้อมassign request Listener เพื่อคอยตรวจEventการร้องขอDataมายังServer ประกอบด้วย http request , http response
+
+```js
+const http = require("http");
+const server = http.createServer(function (req, res) {
+  if (req.url == "/") {
+    res.write("You are at home page");
+    res.end();
+  }
+});
+server.on("connection", function (socket) {
+  console.log("Client connected");
+});
+server.listen(3000);
+console.log("Listening from port 3000");
+
+// line 2 สร้างServerผ่านค่าFunctionเข้าไป โดยFunctionที่ผ่านเข้าไปนั้นจะมีparamsอยู่2ค่าคือ req และ res (ซึ่งในที่นี้หมายถึง HTTP Request, HTTP Response)
+
+//line 3 req.url คือpathที่ถูกส่งมากับHTTP Request หรือพูดง่ายๆว่าเป็น url ที่userกรอกบนBrowserนั่นเอง โดย req.url == "/" เป็นการตรวจสอบว่ามาที่หน้าHome Pageหรือไม่
+
+//line 4 res.write() คือการassign BodyของHTTP Response ที่จะส่งกลับไปยังClient
+
+//line 5 res.end() เป็นการบอกว่าBodyที่อยู่ในHTTP Responseนั้นหมดแล้ว
+```

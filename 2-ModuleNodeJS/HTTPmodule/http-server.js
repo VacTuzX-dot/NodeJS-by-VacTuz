@@ -1,7 +1,12 @@
 const http = require("http");
-const server = http.createServer();
-server.on("connection", function (socket) { // เพิ่มEvent connection และกำหนดให้ผ่านค่าparams socketด้วย
+const server = http.createServer(function (req, res) {
+  if (req.url == "/") {
+    res.write("You are at home page");
+    res.end();
+  }
+});
+server.on("connection", function (socket) {
   console.log("Client connected");
 });
 server.listen(3000);
-console.log("Listening form port 3000");
+console.log("Listening from port 3000");
