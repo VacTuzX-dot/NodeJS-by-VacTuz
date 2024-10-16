@@ -209,4 +209,4 @@ console.log("Listening form port 3000");
 เมื่อClient(Browser)เชื่อมกับServer(HTTP Server)เรียบร้อยก็จะเกิด Event connection เมื่อ Event Listener พบEvent connection ก็จะพิมพ์text Client connected ที่console vscode
 เปิดBrowserลองพิมพ์ url เป็น http://localhost:3000 แล้วกด <Enter>
 
-_Note เมื่อClient ส่งHttp Request ร้องขอDataไปยังServer แต่Examนี้ยังไม่ได้เตรียมBodyที่จะresponseกลับไปที่Client ดังนั้นเมื่อกรอก http://localhost:3000 แล้วกด Enter จึงไม่พบtextใดๆบนBrowser_
+**Note เมื่อClient ส่งHttp Request ร้องขอDataไปยังServer แต่Examนี้ยังไม่ได้เตรียมBodyที่จะresponseกลับไปที่Client ดังนั้นเมื่อกรอก http://localhost:3000 แล้วกด Enter จึงไม่พบtextใดๆบนBrowser**
