@@ -98,7 +98,7 @@ addListener() คือการเพิ่มEventเข้าไปในObje
 
 Eventที่เกิดขึ้นในAppมีหลายรูปแบบ เช่น เมื่อUserกรอกURL ที่ BrowserจะเกิดEvent HTTP Request เพื่อร้องขอDataจาก Server หรือขณะที่Userแตะหน้าจอมือถือแล้วยกนิ้วขึ้น ก็จะเกิดEvent Touched Up Inside เป็นต้น
 
-    Eventที่จะเกิดขึ้นในระหว่างที่Userกำลังใช้งานAppหรือเกิดจากCodeที่เราCodingขึ้นมาก็ได้ เช่น Eventแตะหน้าจอ Eventลากนิ้วที่หน้าจอ EventจากการDouble Click ฯลฯ หากEventที่สร้างขึ้นหรือที่ปล่อยมานั้นตรงกับEventที่Event Listener มองหาอยู่ ก็จะทำคำสั่งตามที่กำหนดไว้ล่วงหน้าทันที
+Eventที่จะเกิดขึ้นในระหว่างที่Userกำลังใช้งานAppหรือเกิดจากCodeที่เราCodingขึ้นมาก็ได้ เช่น Eventแตะหน้าจอ Eventลากนิ้วที่หน้าจอ EventจากการDouble Click ฯลฯ หากEventที่สร้างขึ้นหรือที่ปล่อยมานั้นตรงกับEventที่Event Listener มองหาอยู่ ก็จะทำคำสั่งตามที่กำหนดไว้ล่วงหน้าทันที
 
 Code Exam เพื่อกำหนดEventขึ้นมาเองโดยใช้Method emit() ดังตัวอย่างต่อไปนี้
 <a href="./ModuleEvent/my-event.js">MyEvent</a>
