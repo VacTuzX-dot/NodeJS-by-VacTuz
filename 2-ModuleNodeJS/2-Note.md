@@ -192,3 +192,21 @@ console.log("Listening form port 3000");
 ## Steps 3 ตรวจสอบว่าClientได้ConnectกับServerแล้ว
 
 วิธีตรวจสอบเราต้องกำหนดEvent Listener ชื่อว่า connection ลงไปในobject Server ถ้ามีการเชื่อมต่อสำเร็จแล้วก็จะสั่งให้Runคำสั่งที่ได้เตรียมไว้
+
+```js
+const http = require("http");
+const server = http.createServer();
+server.on("connection", function (socket) {
+  // เพิ่มEvent connection และกำหนดให้ผ่านค่าparams socketด้วย
+  console.log("Client connected");
+});
+server.listen(3000);
+console.log("Listening form port 3000");
+```
+
+## Steps 4 ทดสอบการ Connect ด้วยการเปิดWeb Browser
+
+เมื่อClient(Browser)เชื่อมกับServer(HTTP Server)เรียบร้อยก็จะเกิด Event connection เมื่อ Event Listener พบEvent connection ก็จะพิมพ์text Client connected ที่console vscode
+เปิดBrowserลองพิมพ์ url เป็น http://localhost:3000 แล้วกด <Enter>
+
+_Note เมื่อClient ส่งHttp Request ร้องขอDataไปยังServer แต่Examนี้ยังไม่ได้เตรียมBodyที่จะresponseกลับไปที่Client ดังนั้นเมื่อกรอก http://localhost:3000 แล้วกด Enter จึงไม่พบtextใดๆบนBrowser_
